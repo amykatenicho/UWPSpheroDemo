@@ -1,0 +1,21 @@
+﻿<Application
+  x:Class="BigWhiteBall.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:BigWhiteBall"
+  xmlns:vms="using:BigWhiteBall.ViewModels"
+  xmlns:utils="using:BigWhiteBall.Utility"
+  RequestedTheme="Light">
+  <Application.Resources>
+
+    <vms:ViewModelLocator
+      x:Key="locator" />
+
+    <vms:Constants x:Key="constants"/>
+   
+    <utils:BooleanToVisibilityConverter x:Name="boolVisibilityConverter"/>
+
+  </Application.Resources>
+
+</Application>
+

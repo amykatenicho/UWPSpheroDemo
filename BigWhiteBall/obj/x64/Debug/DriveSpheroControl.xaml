@@ -1,0 +1,556 @@
+﻿<UserControl
+  x:Class="BigWhiteBall.DriveSpheroControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:BigWhiteBall"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:util="using:BigWhiteBall.Utility"
+  mc:Ignorable="d"
+  DataContext="{Binding Source={StaticResource locator},Path={Binding Source={StaticResource constants}, Path=DriveSpheroViewModelXamlPathIndexer}}">
+  <UserControl.Resources>
+    <SolidColorBrush
+      x:Key="headerBrush"
+      Color="black" />
+    <Style
+      x:Key="headerTextStyle"
+      TargetType="TextBlock"
+      BasedOn="{StaticResource HeaderTextBlockStyle}">
+      <Setter
+        Property="Foreground"
+        Value="{StaticResource headerBrush}" />
+      <Setter
+        Property="VerticalAlignment"
+        Value="Center" />
+      <Setter
+        Property="TextAlignment"
+        Value="Center"></Setter>
+    </Style>
+    <Style
+      x:Key="SliderStyle1"
+      TargetType="Slider">
+      <Setter
+        Property="Background"
+        Value="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
+      <Setter
+        Property="BorderThickness"
+        Value="{ThemeResource SliderBorderThemeThickness}" />
+      <Setter
+        Property="Foreground"
+        Value="{ThemeResource SystemControlHighlightAccentBrush}" />
+      <Setter
+        Property="FontFamily"
+        Value="{ThemeResource ContentControlThemeFontFamily}" />
+      <Setter
+        Property="FontSize"
+        Value="{ThemeResource ControlContentThemeFontSize}" />
+      <Setter
+        Property="ManipulationMode"
+        Value="None" />
+      <Setter
+        Property="UseSystemFocusVisuals"
+        Value="True" />
+      <Setter
+        Property="Template">
+        <Setter.Value>
+          <ControlTemplate
+            TargetType="Slider">
+            <Grid
+              Margin="{TemplateBinding Padding}">
+              <Grid.Resources>
+                <Style
+                  x:Key="SliderThumbStyle"
+                  TargetType="Thumb">
+                  <Setter
+                    Property="BorderThickness"
+                    Value="0" />
+                  <Setter
+                    Property="Background"
+                    Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                  <Setter
+                    Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate
+                        TargetType="Thumb">
+                        <Border
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Background="{TemplateBinding Background}"
+                          CornerRadius="4" />
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </Grid.Resources>
+              <Grid.RowDefinitions>
+                <RowDefinition
+                  Height="Auto" />
+                <RowDefinition
+                  Height="*" />
+              </Grid.RowDefinitions>
+              <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup
+                  x:Name="CommonStates">
+                  <VisualState
+                    x:Name="Normal" />
+                  <VisualState
+                    x:Name="Pressed" />
+                  <VisualState
+                    x:Name="Disabled">
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Foreground"
+                        Storyboard.TargetName="HeaderContentPresenter">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="HorizontalDecreaseRect">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="HorizontalTrackRect">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="VerticalDecreaseRect">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="VerticalTrackRect">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="TopTickBar">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="BottomTickBar">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="LeftTickBar">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="RightTickBar">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState
+                    x:Name="PointerOver">
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="HorizontalTrackRect">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="Fill"
+                        Storyboard.TargetName="VerticalTrackRect">
+                        <DiscreteObjectKeyFrame
+                          KeyTime="0"
+                          Value="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+              <ContentPresenter
+                x:Name="HeaderContentPresenter"
+                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                Content="{TemplateBinding Header}"
+                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                FontWeight="{ThemeResource SliderHeaderThemeFontWeight}"
+                Margin="{ThemeResource SliderHeaderThemeMargin}"
+                TextWrapping="Wrap"
+                Visibility="Collapsed"
+                x:DeferLoadStrategy="Lazy" />
+              <Grid
+                x:Name="SliderContainer"
+                Background="Transparent"
+                Control.IsTemplateFocusTarget="True"
+                Grid.Row="1">
+                <Grid
+                  x:Name="HorizontalTemplate"
+                  MinHeight="44">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                      Width="Auto" />
+                    <ColumnDefinition
+                      Width="Auto" />
+                    <ColumnDefinition
+                      Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition
+                      Height="18" />
+                    <RowDefinition
+                      Height="Auto" />
+                    <RowDefinition
+                      Height="18" />
+                  </Grid.RowDefinitions>
+                  <Rectangle
+                    x:Name="HorizontalTrackRect"
+                    Grid.ColumnSpan="3"
+                    Fill="{TemplateBinding Background}"
+                    Height="10"
+                    Grid.Row="1" />
+                  <Rectangle
+                    x:Name="HorizontalDecreaseRect"
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Row="1" />
+                  <TickBar
+                    x:Name="TopTickBar"
+                    Grid.ColumnSpan="3"
+                    Fill="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                    Height="{ThemeResource SliderOutsideTickBarThemeHeight}"
+                    Margin="0,0,0,4"
+                    Visibility="Collapsed"
+                    VerticalAlignment="Bottom" />
+                  <TickBar
+                    x:Name="HorizontalInlineTickBar"
+                    Grid.ColumnSpan="3"
+                    Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"
+                    Height="{ThemeResource SliderTrackThemeHeight}"
+                    Grid.Row="1"
+                    Visibility="Collapsed" />
+                  <TickBar
+                    x:Name="BottomTickBar"
+                    Grid.ColumnSpan="3"
+                    Fill="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                    Height="{ThemeResource SliderOutsideTickBarThemeHeight}"
+                    Margin="0,4,0,0"
+                    Grid.Row="2"
+                    Visibility="Collapsed"
+                    VerticalAlignment="Top" />
+                  <Thumb
+                    x:Name="HorizontalThumb"
+                    AutomationProperties.AccessibilityView="Raw"
+                    Background="{TemplateBinding Foreground}"
+                    Grid.Column="1"
+                    DataContext="{TemplateBinding Value}"
+                    Height="64"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Style="{StaticResource SliderThumbStyle}"
+                    Width="64" />
+                </Grid>
+                <Grid
+                  x:Name="VerticalTemplate"
+                  MinWidth="44"
+                  Visibility="Collapsed">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                      Width="18" />
+                    <ColumnDefinition
+                      Width="Auto" />
+                    <ColumnDefinition
+                      Width="18" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition
+                      Height="*" />
+                    <RowDefinition
+                      Height="Auto" />
+                    <RowDefinition
+                      Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Rectangle
+                    x:Name="VerticalTrackRect"
+                    Grid.Column="1"
+                    Fill="{TemplateBinding Background}"
+                    Grid.RowSpan="3"
+                    Width="10" />
+                  <Rectangle
+                    x:Name="VerticalDecreaseRect"
+                    Grid.Column="1"
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.Row="2" />
+                  <TickBar
+                    x:Name="LeftTickBar"
+                    Fill="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,4,0"
+                    Grid.RowSpan="3"
+                    Visibility="Collapsed"
+                    Width="{ThemeResource SliderOutsideTickBarThemeHeight}" />
+                  <TickBar
+                    x:Name="VerticalInlineTickBar"
+                    Grid.Column="1"
+                    Fill="{TemplateBinding Foreground}"
+                    Grid.RowSpan="3"
+                    Visibility="Collapsed"
+                    Width="20" />
+                  <TickBar
+                    x:Name="RightTickBar"
+                    Grid.Column="2"
+                    Fill="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                    HorizontalAlignment="Left"
+                    Margin="4,0,0,0"
+                    Grid.RowSpan="3"
+                    Visibility="Collapsed"
+                    Width="{ThemeResource SliderOutsideTickBarThemeHeight}" />
+                  <Thumb
+                    x:Name="VerticalThumb"
+                    AutomationProperties.AccessibilityView="Raw"
+                    Background="{TemplateBinding Foreground}"
+                    Grid.ColumnSpan="3"
+                    Grid.Column="0"
+                    DataContext="{TemplateBinding Value}"
+                    Height="64"
+                    Grid.Row="1"
+                    Style="{StaticResource SliderThumbStyle}"
+                    Width="64" />
+                </Grid>
+              </Grid>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+
+  <Grid>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup x:ConnectionId='1'
+        x:Name="LayoutStates">
+        <VisualState x:ConnectionId='2'
+          x:Name="Regular">
+          <VisualState.StateTriggers>
+            <util:AspectRatioTrigger AspectRatio="Landscape"/>
+          </VisualState.StateTriggers>
+        </VisualState>
+        <VisualState x:ConnectionId='3'
+          x:Name="Narrow">
+          <VisualState.Setters>
+            <Setter
+              Target="speedGrid.(Grid.RowSpan)"
+              Value="1" />
+            <Setter
+              Target="slider.(Slider.Orientation)"
+              Value="Horizontal" />
+            <Setter
+              Target="slider.(RelativePanel.AlignTopWithPanel)"
+              Value="False" />
+            <Setter
+              Target="slider.(RelativePanel.AlignBottomWithPanel)"
+              Value="False" />
+            <Setter
+              Target="slider.(RelativePanel.AlignHorizontalCenterWithPanel)"
+              Value="False" />
+            <Setter
+              Target="slider.(RelativePanel.AlignVerticalCenterWithPanel)"
+              Value="True" />
+            <Setter
+              Target="slider.(RelativePanel.AlignLeftWithPanel)"
+              Value="True" />
+            <Setter
+              Target="slider.(RelativePanel.AlignRightWithPanel)"
+              Value="True" />
+            <Setter
+              Target="textBlock.(RelativePanel.Below)"
+              Value="" />
+            <Setter
+              Target="textBlock.(RelativePanel.AlignVerticalCenterWithPanel)"
+              Value="False" />
+            <Setter
+              Target="textBlock.(RelativePanel.AlignHorizontalCenterWithPanel)"
+              Value="False" />
+            <Setter
+              Target="rotationGrid.(Grid.Column)"
+              Value="0" />
+            <Setter
+              Target="rotationGrid.(Grid.Row)"
+              Value="1" />
+            <Setter
+              Target="slider.(FrameworkElement.Margin)">
+              <Setter.Value>
+                <Thickness>20,0</Thickness>
+              </Setter.Value>
+            </Setter>
+            <Setter
+              Target="speedGrid.(Grid.ColumnSpan)"
+              Value="2" />
+            <Setter
+              Target="rotationGrid.(Grid.ColumnSpan)"
+              Value="2" />
+            <Setter
+              Target="rotationGrid.(Grid.RowSpan)"
+              Value="1" />
+            <Setter
+              Target="textBlock.(RelativePanel.RightOf)"
+              Value="" />
+            <Setter
+              Target="textBlock.(RelativePanel.AlignHorizontalCenterWith)"
+              Value="slider" />
+            <Setter
+              Target="speedGrid.(FrameworkElement.MaxHeight)"
+              Value="200" />
+            <Setter
+              Target="textBlock.(RelativePanel.Above)"
+              Value="slider" />
+            <Setter
+              Target="textBlock.(RelativePanel.AlignRightWith)"
+              Value="slider" />
+            <Setter
+              Target="textBlock.(FrameworkElement.Margin)">
+              <Setter.Value>
+                <Thickness>0,0,20,0</Thickness>
+              </Setter.Value>
+            </Setter>
+          </VisualState.Setters>
+          <VisualState.StateTriggers>
+            <util:AspectRatioTrigger AspectRatio="Portrait"/>
+
+          </VisualState.StateTriggers>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition
+        Width="*" />
+      <ColumnDefinition
+        Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition
+        Height="Auto" />
+      <RowDefinition
+        Height="*" />
+    </Grid.RowDefinitions>
+    <Image
+      Source="Assets/driveSpheroBackdrop.jpg"
+      Stretch="UniformToFill"
+      Grid.ColumnSpan="2"
+      Grid.RowSpan="2" />
+    <Grid x:ConnectionId='4'
+      x:Name="speedGrid"
+      Grid.RowSpan="2">
+      <Grid.RowDefinitions>
+        <RowDefinition
+          Height="auto" />
+        <RowDefinition
+          Height="10*" />
+        <RowDefinition
+          Height="*" />
+      </Grid.RowDefinitions>
+      <TextBlock
+        Text="speed"
+        Style="{StaticResource headerTextStyle}" />
+      <RelativePanel
+        Grid.Row="1">
+        <Slider x:ConnectionId='6'
+          x:Name="slider"
+          Orientation="Vertical"
+          RelativePanel.AlignTopWithPanel="True"
+          RelativePanel.AlignBottomWithPanel="True"
+          RelativePanel.AlignHorizontalCenterWithPanel="True"
+          Minimum="0"
+          Maximum="100"
+          SmallChange="5"
+          LargeChange="10"
+          Value="{Binding SpeedValue, Mode=TwoWay}"
+          Style="{StaticResource SliderStyle1}"
+          Background="#66000000"
+          Foreground="Black"
+          d:LayoutOverrides="LeftPosition, RightPosition" />
+        <TextBlock x:ConnectionId='7'
+          x:Name="textBlock"
+          RelativePanel.AlignVerticalCenterWithPanel="True"
+          RelativePanel.RightOf="slider"
+          Style="{StaticResource headerTextStyle}"
+          FontSize="24"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center">
+      		<Run
+            Text="{Binding SpeedValue, FallbackValue=0.0}" />
+      		<Run
+            x:Uid="runSpeed" />
+        </TextBlock>
+
+
+
+      </RelativePanel>
+    </Grid>
+    <Grid x:ConnectionId='5'
+      x:Name="rotationGrid"
+      Grid.Column="1"
+      Grid.RowSpan="2">
+      <Grid.RowDefinitions>
+        <RowDefinition
+          Height="auto" />
+        <RowDefinition
+          Height="10*" />
+        <RowDefinition
+          Height="*" />
+      </Grid.RowDefinitions>
+      <TextBlock
+        Text="rotation"
+        Style="{StaticResource headerTextStyle}"
+        Grid.Column="1" />
+      <TextBlock
+        Grid.Row="1"
+        Grid.Column="1"
+        Style="{StaticResource headerTextStyle}"
+        FontSize="24"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+      <Run
+          Text="{Binding RotationValue,FallbackValue=0.0}" />
+      <Run
+          x:Uid="runDegrees" />
+      </TextBlock>
+      <Viewbox
+        Grid.Column="1"
+        Grid.Row="1"
+        Margin="20,0,20,0">
+        <local:RadialValueSelector
+          MinAngle="0"
+          MaxAngle="359"
+          Minimum="0"
+          Maximum="360"
+          Increment="10"
+          Width="200"
+          Height="200"
+          Value="{Binding RotationValue,Mode=TwoWay}">
+          <local:RadialValueSelector.ThumbContent>
+            <Ellipse
+              Width="30"
+              Height="30"
+              Fill="Black" />
+          </local:RadialValueSelector.ThumbContent>
+        </local:RadialValueSelector>
+      </Viewbox>
+    </Grid>
+  </Grid>
+</UserControl>
+
